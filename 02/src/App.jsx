@@ -1,15 +1,16 @@
 import React from 'react';
 import PlayerInfo from "../Components/playerInfo";
+import GameBoard from '../Components/GameBoard';
 
 function App() {
   return (
     <main>
       <div id="game-container">
         <ol id="players">
-          <PlayerInfo name="player 1" symbol="X" />
-          <PlayerInfo name="player 2" symbol="O" />
+          <PlayerInfo initialname="player 1" symbol="X" />
+          <PlayerInfo initialname="player 2" symbol="O" />
         </ol>
-        Game Board
+        <GameBoard/>
       </div>
       LOG
     </main>
