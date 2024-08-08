@@ -5,7 +5,9 @@ export default function App() {
   return (
     <>
 
-    <p>meer twana </p>
+    <p>meer twana qader nader  </p>
+hi 
+
       <Header />
       <main>
         <AuthInputs />
