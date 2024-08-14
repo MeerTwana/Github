@@ -1,4 +1,15 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+import Button from './Button.jsx';
+import CustomInput from './Input.jsx'
+
+const ControlDev = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+`;
+
 
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -14,39 +25,42 @@ export default function AuthInputs() {
   }
 
   function handleLogin() {
+    console.log('Login button clicked');
     setSubmitted(true);
   }
+  
 
   const emailNotValid = submitted && !enteredEmail.includes('@');
   const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
   return (
     <div id="auth-inputs">
-      <div className="controls">
-        <p>
-          <label>Email</label>
-          <input
+      <ControlDev>
+       <CustomInput
+       label="Email"
+        invalid={emailNotValid}
             type="email"
-            className={emailNotValid ? 'invalid' : undefined}
+            $invalid={emailNotValid}
             onChange={(event) => handleInputChange('email', event.target.value)}
           />
-        </p>
-        <p>
-          <label>Password</label>
-          <input
+                    
+     
+          <CustomInput
+          label="Password"
             type="password"
-            className={passwordNotValid ? 'invalid' : undefined}
+            invalid={passwordNotValid}
             onChange={(event) =>
               handleInputChange('password', event.target.value)
             }
           />
-        </p>
-      </div>
+        
+      </ControlDev>
       <div className="actions">
         <button type="button" className="text-button">
           Create a new account
         </button>
-        <button className='button' onClick={handleLogin}>Sign In</button>
+      
+      <Button onClick={handleLogin} >Sign In</Button>
       </div>
     </div>
   );
