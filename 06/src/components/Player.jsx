@@ -8,6 +8,7 @@ export default function Player() {
 
    function handleClick(){
     SetEntaredName (PlayerName.current.value);
+    PlayerName.current.value = '        ';
    }
 
   return (
@@ -15,7 +16,7 @@ export default function Player() {
       <h2>Welcome {enteredName ?? 'unkown entity'}</h2>
       <p>
         <input ref={PlayerName} type="text" 
-  onChange={handleClick}    />
+     />
         <button onClick={handleClick}>Set Name</button>
       </p>
     </section>
