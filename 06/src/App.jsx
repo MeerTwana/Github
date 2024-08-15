@@ -1,6 +1,5 @@
 import Player from './components/Player.jsx';
 import TimerChallenge from './components/TimerChallenge.jsx';
-import GameOver from './components/GameOver.jsx';
 
 function App() {
   return (
@@ -13,7 +12,7 @@ function App() {
         <TimerChallenge title="Getting tough" TargetTime={10}/>
         <TimerChallenge title="Hard" TargetTime={15}/>
       </div>
-      <GameOver> </GameOver>
+      
        
         
     </>
