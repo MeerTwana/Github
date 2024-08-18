@@ -1,25 +1,34 @@
 import { useState, useRef } from "react";
-import GameOver from "./GameOver";
+import Result from "./Result";
 
 export default function TimerChallenge({ title, TargetTime }) {
   const Timer = useRef();
-  const [timerStarted, SetTimerStarted] = useState(false);
-  const [timerExpired, SetTimerExpired] = useState(false);
+  const dialog = useRef();
+  const [timerStarted, setTimerStarted] = useState(false);
+  const [timerExpired, setTimerExpired] = useState(false);
 
   function handleStart() {
-    SetTimerStarted(true);
+    setTimerStarted(true);
     Timer.current = setTimeout(() => {
-      SetTimerExpired(true);
+      setTimerExpired(true);
+      // Adding a slight delay to ensure the Result component is rendered before showing the modal
+      setTimeout(() => {
+        if (dialog.current) {
+          dialog.current.showModal();
+        }
+      }, 0); // 0 ms delay ensures the dialog is rendered before this runs
     }, TargetTime * 1000);
   }
 
   function handleStop() {
     clearTimeout(Timer.current);
+    setTimerStarted(false);
   }
 
   return (
     <>
-      {timerExpired && <GameOver TargetTime={TargetTime} result="Lost" />}
+      {/* Render Result component outside of conditional rendering */}
+      <Result ref={dialog} TargetTime={TargetTime} result="Lost" />
 
       <section className="challenge">
         <h2>{title}</h2>
