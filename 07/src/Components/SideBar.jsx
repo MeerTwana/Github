@@ -9,7 +9,17 @@ return <aside className="w-1/3 px-8 py-16 bg-stone-900
        hover:bg-stone-600 hover:text-stone-100">
         + Add Project
     </button>
-</div>
+    </div>
+    <ul className="">
+        <li className="">
+            <p>
+                Learning React
+            </p>
+
+        </li>
+        </ul>
+    
+
 
 
 
