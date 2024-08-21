@@ -1,18 +1,15 @@
 import { useState } from 'react';
-
 import Header from './components/Header.jsx';
 import Shop from './components/Shop.jsx';
 import { DUMMY_PRODUCTS } from './dummy-products.js';
+import { CartContext } from './store/context.jsx';
 
 function App() {
-  const [shoppingCart, setShoppingCart] = useState({
-    items: [],
-  });
+  const [shoppingCart, setShoppingCart] = useState({ items: [] });
 
   function handleAddItemToCart(id) {
     setShoppingCart((prevShoppingCart) => {
       const updatedItems = [...prevShoppingCart.items];
-
       const existingCartItemIndex = updatedItems.findIndex(
         (cartItem) => cartItem.id === id
       );
@@ -47,9 +44,7 @@ function App() {
         (item) => item.id === productId
       );
 
-      const updatedItem = {
-        ...updatedItems[updatedItemIndex],
-      };
+      const updatedItem = { ...updatedItems[updatedItemIndex] };
 
       updatedItem.quantity += amount;
 
@@ -59,20 +54,16 @@ function App() {
         updatedItems[updatedItemIndex] = updatedItem;
       }
 
-      return {
-        items: updatedItems,
-      };
+      return { items: updatedItems };
     });
   }
 
   return (
-    <>
-      <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-      />
+    // Providing the CartContext to the entire app
+    <CartContext.Provider value={shoppingCart}>
+      <Header onUpdateCartItemQuantity={handleUpdateCartItemQuantity} />
       <Shop onAddItemToCart={handleAddItemToCart} />
-    </>
+    </CartContext.Provider>
   );
 }
 
