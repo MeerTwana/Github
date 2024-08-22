@@ -1,15 +1,43 @@
-import { useRef, useState } from 'react';
+import { useRef, useState , useEffect } from 'react';
 
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
+import { sortPlacesByDistance } from './loc.js';
 
 function App() {
+
   const modal = useRef();
   const selectedPlace = useRef();
+  const[availablePlaces,setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
+
+  useEffect(()=>{
+    const storedIds=JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+const storedPlaces =storedIds.map(id => AVAILABLE_PLACES.find((place)=>place.id ===id));
+setPickedPlaces(storedPlaces);
+
+
+
+  },[])
+
+useEffect(() => {
+  //dynamic browser function to tares  user location 
+  //function to  trace the location of the user with out useEffect will cause an error of infinite loop so we use side effect 
+  //bakar henane useEffect lo aw kataya ka btawe ba sideEffect function ka run be karegare lasar run e component nabe 
+  navigator.geolocation.getCurrentPosition((position) => {
+   const SortedPlaces= sortPlacesByDistance
+   (AVAILABLE_PLACES,
+    position.coords.latitude
+    ,position.coords.longitude);
+   setAvailablePlaces(SortedPlaces);
+  });
+
+},[ ]);
+
+
 
   function handleStartRemovePlace(id) {
     modal.current.open();
@@ -28,13 +56,25 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+const storedIds =JSON.parse(   localStorage.getItem('selectedPlaces')) || [];
+if(storedIds.indexOf(id)=== -1){ 
+   localStorage.setItem('selectedPlaces' ,JSON.stringify([id,...storedIds]));
   }
+}
+
 
   function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
+   
     modal.current.close();
+  const storedIds=JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+  localStorage.setItem('selectedPlaces' ,JSON.stringify(storedIds.filter((id)=> id!==selectedPlace.current)) );
+  
+  
+  
+  
   }
 
   return (
@@ -63,7 +103,8 @@ function App() {
         />
         <Places
           title="Available Places"
-          places={AVAILABLE_PLACES}
+          places={availablePlaces}
+          fallbackText='Sorting Places By distance'
           onSelectPlace={handleSelectPlace}
         />
       </main>
