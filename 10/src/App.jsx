@@ -1,4 +1,4 @@
-import { useRef, useState , useEffect } from 'react';
+import { useRef, useState , useEffect,useCallback } from 'react';
 
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
@@ -9,7 +9,8 @@ import { sortPlacesByDistance } from './loc.js';
 
 function App() {
 
-  const modal = useRef();
+//  const modal = useRef();
+const[modelIsOpen,setModelIsOpen]= useState(false);
   const selectedPlace = useRef();
   const[availablePlaces,setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
@@ -40,13 +41,13 @@ useEffect(() => {
 
 
   function handleStartRemovePlace(id) {
-    modal.current.open();
-    selectedPlace.current = id;
+    setModelIsOpen(true);
+        selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
-  }
+    setModelIsOpen(false);
+    }
 
   function handleSelectPlace(id) {
     setPickedPlaces((prevPickedPlaces) => {
@@ -62,28 +63,29 @@ if(storedIds.indexOf(id)=== -1){
   }
 }
 
-
-  function handleRemovePlace() {
+const handleRemovePlace =useCallback( function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
    
-    modal.current.close();
+    setModelIsOpen(false);
   const storedIds=JSON.parse(localStorage.getItem('selectedPlaces')) || [];
   localStorage.setItem('selectedPlaces' ,JSON.stringify(storedIds.filter((id)=> id!==selectedPlace.current)) );
   
   
   
   
-  }
+  },[]);
+ 
 
   return (
     <>
-      <Modal ref={modal}>
+      <Modal open={modelIsOpen}>
+        {modelIsOpen &&(
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
           onConfirm={handleRemovePlace}
-        />
+        />)}
       </Modal>
 
       <header>
