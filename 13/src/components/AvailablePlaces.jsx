@@ -1,4 +1,5 @@
 import Places from './Places.jsx';
+
 import { useEffect, useState } from 'react';
 
 export default function AvailablePlaces({ onSelectPlace }) {
@@ -24,8 +25,16 @@ export default function AvailablePlaces({ onSelectPlace }) {
     <Places
       title="Available Places"
       places={availablePlaces}
+
+
+export default function AvailablePlaces({ onSelectPlace }) {
+  return (
+    <Places
+      title="Available Places"
+      places={availablePlaces}
       fallbackText="No places available."
       onSelectPlace={onSelectPlace}
     />
   );
+};
 }
