@@ -5,12 +5,10 @@ import './App.css';
 function App() {
   const [movies, setMovies] = useState([]); // Initialize as an empty array
 
-  function fetchMoviesHandler() {
-    fetch('https://swapi.dev/api/films/') // Corrected the URL and added a trailing slash
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+  async function fetchMoviesHandler() {
+     const response = await fetch('https://swapi.dev/api/films/') // Corrected the URL and added a trailing slash
+     const data =await response.json
+      
         const transformedMovies = data.results.map((movieData) => {
           return {
             id: movieData.episode_id,
@@ -20,7 +18,7 @@ function App() {
           };
         });
         setMovies(transformedMovies); // Set transformed movies to state
-      })
+      }
       .catch((error) => {
         console.error('Error fetching movies:', error);
       });
