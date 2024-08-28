@@ -23,9 +23,9 @@ export default function CreateReminder(){
   <p className="text-lg">Description :</p>
   <textarea type="text" className="w-3/4 rounded-md h-20" />
 </div>
-<div className="  gap-6 pt-2 pb-4  flex flex-row">
-  <p className="text-lg">priority:
-  <Select className='w-24'
+<div className="  gap-4 pt-2 pb-4  flex flex-row">
+  <p className="text-lg pr-4 ">priority:
+  <Select className='w-24 pl-3'
     showSearch
     placeholder="Select Priority"
     filterOption={(input, option) =>
