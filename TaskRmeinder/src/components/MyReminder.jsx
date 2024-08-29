@@ -13,7 +13,7 @@ export default function MyReminder(){
 </thead>
    
 <tbody>
-<tr className="border h-11 border-red-600">
+<tr className="border  h-11 border-red-600">
     <td>test</td>
     <td>test</td>
     <td>test</td>

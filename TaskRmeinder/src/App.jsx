@@ -2,6 +2,7 @@ import CreateReminder from "./components/CreateReminder.jsx";
 import NavBar from "./components/NavBar.jsx";
 import MyReminder from "./components/MyReminder.jsx";
 import { useState } from "react";
+import SentReminder from "./components/SentRmeinder.jsx";
 
 export default function App() {
   const [activeComponent, setActiveComponent] = useState("Send Reminder");
@@ -16,6 +17,7 @@ export default function App() {
 
       {activeComponent === "Send Reminder" && <CreateReminder />}
       {activeComponent === "My Reminder" && <MyReminder />}
+      {activeComponent === "Sent Reminder" && <SentReminder />}
     </div>
   );
 }

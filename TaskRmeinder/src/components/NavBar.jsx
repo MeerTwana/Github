@@ -16,7 +16,7 @@ export default function NavBar({ onNavClick }) {
           </button>
           <button
             className="btn btn-ghost text-sm px-3"
-            onClick={() => onNavClick("My Reminder")}
+            onClick={() => onNavClick("Sent Reminder")}
           >
             Sent Reminder
           </button>
