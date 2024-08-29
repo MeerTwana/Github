@@ -20,7 +20,13 @@ export default function MyReminder(){
     <td>test</td>
     <td>test</td>
 </tr>
-<tr><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td></tr>
+<tr className="border h-11 border-red-600">
+    <td>test</td>
+    <td>test</td>
+    <td>test</td>
+    <td>test</td>
+    <td>test</td>
+</tr>
 
 
 </tbody>
