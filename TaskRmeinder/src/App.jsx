@@ -11,12 +11,11 @@ export default function App() {
   }
 
   return (
-    <div className="w-2/4 h-[450px] ml-10 mt-10 bg-slate-100">
+    <div className="w-2/4 h-[385px] ml-10 mt-10 bg-slate-100">
       <NavBar onNavClick={handleNavClick} />
-      
-        {activeComponent == "Send Reminder" && <CreateReminder />}
-        {activeComponent == "My Reminder" && <MyReminder />}
-      
+
+      {activeComponent === "Send Reminder" && <CreateReminder />}
+      {activeComponent === "My Reminder" && <MyReminder />}
     </div>
   );
 }
