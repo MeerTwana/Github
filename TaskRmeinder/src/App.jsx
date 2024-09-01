@@ -2,7 +2,7 @@ import CreateReminder from "./components/CreateReminder.jsx";
 import NavBar from "./components/NavBar.jsx";
 import MyReminder from "./components/MyReminder.jsx";
 import { useState } from "react";
-import SentReminder from "./components/SentRmeinder.jsx";
+import SentReminder from "./components/SentReminder.jsx";
 
 export default function App() {
   const [activeComponent, setActiveComponent] = useState("Send Reminder");
