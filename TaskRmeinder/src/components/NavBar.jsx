@@ -3,19 +3,19 @@ export default function NavBar({ onNavClick }) {
       <div className="pl-1 bg-slate-300">
         <div className="navbar bg-neutral text-neutral-content">
           <button
-            className="btn btn-ghost text-sm px-3"
+            className="btn btn-ghost text-lg px-3"
             onClick={() => onNavClick("Send Reminder")}
           >
-            Send Reminder
+           +
           </button>
           <button
-            className="btn btn-ghost text-sm px-3"
+            className="btn btn-ghost text-lg px-3"
             onClick={() => onNavClick("My Reminder")}
           >
-            My Reminder
+            Inbox
           </button>
           <button
-            className="btn btn-ghost text-sm px-3"
+            className="btn btn-ghost text-lg px-3"
             onClick={() => onNavClick("Sent Reminder")}
           >
             Sent Reminder
